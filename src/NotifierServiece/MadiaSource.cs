@@ -36,9 +36,6 @@ namespace NotifierServiece
 
         public MediaSource(string homePageUrl, string name = "")
         {
-            Object a = null;
-            var b = a ?? new Object();
-
             Id = Guid.NewGuid();
 
             if (string.IsNullOrWhiteSpace(name) && homePageUrl.Split("//").Length > 1)
@@ -46,6 +43,10 @@ namespace NotifierServiece
             else
                 Name = string.IsNullOrWhiteSpace(name) ? homePageUrl : name;
 
+            if (string.IsNullOrEmpty(homePageUrl))
+                throw new ArgumentException("Invalid home page URL");
+
+            HomePageUrl = homePageUrl;
             ContentList = new List<MediaContent>();
             RegExrForDataList = new List<Regex>();
         }
