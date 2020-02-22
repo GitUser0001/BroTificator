@@ -61,7 +61,6 @@ namespace NotifierServiece
 
         public void StartWathcer()
         {
-            var context = SynchronizationContext.Current;
             watcherCancellationToken = new CancellationTokenSource();
             CancellationToken ct = watcherCancellationToken.Token;
 
@@ -166,10 +165,9 @@ namespace NotifierServiece
             {
                 foreach (var mediaContent in mediaSource.ContentList)
                 {
-                    if (counter % (int)mediaContent.UpdateFrequency != 0 || counter != 0)
+                    if (counter % (int)mediaContent.UpdateFrequency != 0 || counter == 0)
                         continue;
-
-                    //Console.WriteLine($"Checking... {mediaContent.Name}");
+                    
                     UpdateMediaContent(mediaSource, mediaContent);
 
                     Thread.Sleep(1000);
