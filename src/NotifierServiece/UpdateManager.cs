@@ -123,7 +123,7 @@ namespace NotifierServiece
 
         public void UpdateUserCollection(List<MediaContent> mediaContents)
         {
-            mediaContents.Sort((a, b) => a.CompareTo(b));
+            mediaContents.Sort((a, b) => b.CompareTo(a));
         }
 
         public bool TryToRemoveMediaContent(MediaContent mediaContent)
