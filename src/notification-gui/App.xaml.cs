@@ -8,6 +8,7 @@ using System.Windows;
 using System.ComponentModel;
 using NotifierServiece;
 using Notifications.Wpf;
+using System.Diagnostics;
 
 namespace notification_gui
 {
@@ -22,6 +23,12 @@ namespace notification_gui
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            var thisProcessName = Process.GetCurrentProcess().ProcessName;
+            if (Process.GetProcesses().Count(p => p.ProcessName == thisProcessName) > 1) {
+                MessageBox.Show("You have another instance of the applicaiton");
+                Application.Current.Shutdown();
+            }
+
             base.OnStartup(e);
 
             UpdateManager.GetUpdateManager.onMediaContentChanged += ShowNotification;
