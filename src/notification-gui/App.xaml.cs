@@ -71,6 +71,7 @@ namespace notification_gui
             MainWindow.Close();
             _notifyIcon.Dispose();
             _notifyIcon = null;
+            Application.Current.Shutdown();
         }
 
         private void ShowMainWindow()
