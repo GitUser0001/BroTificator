@@ -78,6 +78,8 @@ namespace NotifierServiece
                 }
 
             }, ct);
+
+            onCollectionChaned(mediaContentsUI);
         }
 
         public void StopWatcher()

@@ -23,21 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Drawing">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\System.Drawing.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="System.Drawing.Design">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\System.Drawing.Design.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\System.Windows.Forms.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
