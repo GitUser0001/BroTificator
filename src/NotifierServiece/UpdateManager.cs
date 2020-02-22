@@ -157,6 +157,8 @@ namespace NotifierServiece
             }
 
             mediaDB = JsonConvert.DeserializeObject<List<MediaSource>>(File.ReadAllText(mediaDBFileName));
+
+            updateMediaSources(mediaDB);
         }
 
         void Update(IEnumerable<MediaSource> mediaDB, int counter)
@@ -177,7 +179,7 @@ namespace NotifierServiece
 
         void UpdateMediaContent(MediaSource mediaSource, MediaContent mediaContent)
         {
-            using (WebClient client = new WebClient())
+            using (WebClient client = new WebClient() { Encoding = System.Text.Encoding.UTF8 })
             {
                 string htmlCode = client.DownloadString(mediaContent.PageUrl);
                 string lastResult = null;
@@ -225,17 +227,45 @@ namespace NotifierServiece
 
         List<MediaSource> GenerateDefaultMediaSource()
         {
-            MediaSource defaultSource = new MediaSource("https://animevost.org/");
+            MediaSource defaultSource1 = new MediaSource("https://animevost.org");
 
-            var regExpListForAnimevost = new List<Regex>() {
+            var regExpListForSource1 = new List<Regex>() {
                 new Regex(@"<title>([^<]*)<\/title>"),
-                new Regex(@".*?(\d[-| ]\d+)")
+                new Regex(@".*?\d+[-| ](\d+)")
             };
-            defaultSource.RegExrForDataList.AddRange(regExpListForAnimevost);
+            defaultSource1.RegExrForDataList.AddRange(regExpListForSource1);
 
-            defaultSource.RegexrForName = new Regex(@"<title>([^\/]*)");
+            defaultSource1.RegexrForName = new Regex(@"<title>([^\/]*)");
 
-            return new List<MediaSource>() { defaultSource };
+
+            MediaSource defaultSource2 = new MediaSource("https://anistar.org");
+
+            var regExpListForSource2 = new List<Regex>() {
+                new Regex(@"<div class=""descripts\"">[^<]*<p[^<]*?(\d+)")
+            };
+            defaultSource2.RegExrForDataList.AddRange(regExpListForSource2);
+
+            defaultSource2.RegexrForName = new Regex(@"<title>[^\w]*([\w\s\]\[]*)");
+
+
+            return new List<MediaSource>() { defaultSource1, defaultSource2 };
+        }
+
+        void updateMediaSources(List<MediaSource> mediaSources)
+        {
+            GenerateDefaultMediaSource().ForEach(defaultMediaSource =>
+            {
+                var mediaSource = mediaDB.FindLast(mediaSource => mediaSource.HomePageUrl.Equals(defaultMediaSource.HomePageUrl));
+                if (mediaSource != null)
+                {
+                    mediaSource.RegExrForDataList = defaultMediaSource.RegExrForDataList;
+                    mediaSource.RegexrForName = defaultMediaSource.RegexrForName;
+                }
+                else
+                {
+                    mediaSources.Add(defaultMediaSource);
+                }
+            });
         }
     }
 }
