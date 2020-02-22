@@ -23,6 +23,7 @@ namespace notification_gui
         public AddResourcePage()
         {
             InitializeComponent();
+            tbUrl.Focus();
         }
 
         private void BtnSab_Click(object sender, RoutedEventArgs e)
