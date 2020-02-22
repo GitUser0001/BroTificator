@@ -1,0 +1,45 @@
+﻿<Page x:Class="notification_gui.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:notification_gui"
+      mc:Ignorable="d" 
+      d:DesignHeight="655" d:DesignWidth="500"
+      Title="MainPage">
+
+    <Border Padding="10">
+        <StackPanel>
+            <!--Buttons BtnAdd and BtnDel-->
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BtnDel" Click="BtnDel_Click" Grid.Column="1" Height="40" Margin="10,0,0,0" Content="-" />
+                <Button x:Name="BtnAdd" Click="BtnAdd_Click" Grid.Column="0" Height="40" Content="+" />
+
+            </Grid>
+            <!--ListBox-->
+            <ListBox x:Name="lboxMediaContent" Height="490" Margin="0,10,0,0" >
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10">
+                            <StackPanel>
+                                <!-- Insert everything u want here-->
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding WasUpdated}"/>
+                                <TextBlock Text="{Binding LastUpdated}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>          
+
+        </StackPanel>
+    </Border>
+</Page>
