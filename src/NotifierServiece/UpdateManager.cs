@@ -256,6 +256,19 @@ namespace NotifierServiece
                 mediaSourcesDefaultList.Add(defaultSource);
             }
 
+            {
+                MediaSource defaultSource = new MediaSource("https://mangakakalot.com");
+
+                var regExpListForSource = new List<Regex>() {
+                new Regex(@"<div class=""chapter-list"">[^>]+>[^>]+[^>]+>[^>]+[^>]+>Chapter (\d*)")
+                };
+                defaultSource.RegExrForDataList.AddRange(regExpListForSource);
+
+                defaultSource.RegexrForName = new Regex(@"<title>([^<]*)-");
+
+                mediaSourcesDefaultList.Add(defaultSource);
+            }
+
             return mediaSourcesDefaultList;
         }
 
