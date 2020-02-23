@@ -252,6 +252,8 @@ namespace NotifierServiece
                 defaultSource.RegExrForDataList.AddRange(regExpListForSource);
 
                 defaultSource.RegexrForName = new Regex(@"<title>[^,]*,([^,<]*)");
+
+                mediaSourcesDefaultList.Add(defaultSource);
             }
 
             return mediaSourcesDefaultList;
