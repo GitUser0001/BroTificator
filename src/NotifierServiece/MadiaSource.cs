@@ -7,6 +7,7 @@ namespace NotifierServiece
 {
     public class MediaSource
     {
+        //danya cheburek
         public Guid Id { get; private set; }
         public string Name { get; set; }
         public string HomePageUrl { get; set; }
