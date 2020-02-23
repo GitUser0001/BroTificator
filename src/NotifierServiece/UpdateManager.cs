@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -96,9 +96,9 @@ namespace NotifierServiece
 
             if (mediaSource != null)
             {
-                using (WebClient client = new WebClient())
+                using (WebClient client = new WebClient() { Encoding = Encoding.UTF8 })
                 {
-                    string htmlCode = client.DownloadString(url);
+                    var htmlCode = client.DownloadString(url);
 
                     var regExpResult = mediaSource.RegexrForName.Match(htmlCode);
                     if (regExpResult.Success && regExpResult.Groups.Count > 0)
@@ -245,7 +245,7 @@ namespace NotifierServiece
             };
             defaultSource2.RegExrForDataList.AddRange(regExpListForSource2);
 
-            defaultSource2.RegexrForName = new Regex(@"<title>[^\w]*([\w\s\]\[]*)");
+            defaultSource2.RegexrForName = new Regex(@"<title>[^,]*,([^,<]*)");
 
 
             return new List<MediaSource>() { defaultSource1, defaultSource2 };

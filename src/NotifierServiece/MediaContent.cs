@@ -17,8 +17,8 @@ namespace NotifierServiece
         public MediaContent(string pageUrl, string name = "...", UpdateFrequency updateFrequency = UpdateFrequency.Height)
         {
             Id = Guid.NewGuid();
-            PageUrl = pageUrl;
-            Name = name;
+            PageUrl = pageUrl.Trim();
+            Name = name.Trim();
             LastUpdated = DateTime.MinValue;
             WasUpdated = false;
             UpdateFrequency = updateFrequency;
