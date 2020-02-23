@@ -227,28 +227,34 @@ namespace NotifierServiece
 
         List<MediaSource> GenerateDefaultMediaSource()
         {
-            MediaSource defaultSource1 = new MediaSource("https://animevost.org");
+            List<MediaSource> mediaSourcesDefaultList = new List<MediaSource>();
 
-            var regExpListForSource1 = new List<Regex>() {
+            {
+                MediaSource defaultSource = new MediaSource("https://animevost.org");
+
+                var regExpListForSource = new List<Regex>() {
                 new Regex(@"<title>([^<]*)<\/title>"),
                 new Regex(@".*?\d+[-| ](\d+)")
-            };
-            defaultSource1.RegExrForDataList.AddRange(regExpListForSource1);
+                };
+                defaultSource.RegExrForDataList.AddRange(regExpListForSource);
 
-            defaultSource1.RegexrForName = new Regex(@"<title>([^\/]*)");
+                defaultSource.RegexrForName = new Regex(@"<title>([^\/]*)");
 
+                mediaSourcesDefaultList.Add(defaultSource);
+            }
 
-            MediaSource defaultSource2 = new MediaSource("https://anistar.org");
+            {
+                MediaSource defaultSource = new MediaSource("https://anistar.org");
 
-            var regExpListForSource2 = new List<Regex>() {
+                var regExpListForSource = new List<Regex>() {
                 new Regex(@"<div class=""descripts\"">[^<]*<p[^<]*?(\d+)")
-            };
-            defaultSource2.RegExrForDataList.AddRange(regExpListForSource2);
+                };
+                defaultSource.RegExrForDataList.AddRange(regExpListForSource);
 
-            defaultSource2.RegexrForName = new Regex(@"<title>[^,]*,([^,<]*)");
+                defaultSource.RegexrForName = new Regex(@"<title>[^,]*,([^,<]*)");
+            }
 
-
-            return new List<MediaSource>() { defaultSource1, defaultSource2 };
+            return mediaSourcesDefaultList;
         }
 
         void updateMediaSources(List<MediaSource> mediaSources)
