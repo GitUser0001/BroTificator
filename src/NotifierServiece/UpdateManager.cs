@@ -167,7 +167,7 @@ namespace NotifierServiece
             {
                 foreach (var mediaContent in mediaSource.ContentList)
                 {
-                    if (counter % (int)mediaContent.UpdateFrequency != 0 || counter == 0)
+                    if (counter % (int)mediaContent.UpdateFrequency != 0 && counter != 0)
                         continue;
                     
                     UpdateMediaContent(mediaSource, mediaContent);
